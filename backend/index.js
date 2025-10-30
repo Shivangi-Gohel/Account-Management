@@ -8,9 +8,8 @@ const app = express();
 connectDB();
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
+import authRouter from './routes/authRouter.js';
+app.use('/api/auth', authRouter);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
