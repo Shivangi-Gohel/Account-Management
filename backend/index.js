@@ -9,8 +9,8 @@ const app = express();
 connectDB();
 
 app.use(cors({
-  origin: "http://localhost:5173",  // your frontend URL
-  credentials: true,                // allow cookies / credentials
+  origin: ["http://localhost:5173", "https://account-management-two.vercel.app"],  
+  credentials: true,        
 }))
 
 app.use(express.json({ limit: "10mb" }));
