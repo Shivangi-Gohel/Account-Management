@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { URL } from "@/constant.js";
+import { URL } from "../constant.js";
 
 const AuthContext = createContext();
 

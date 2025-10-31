@@ -7,8 +7,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
-import { useAuth } from "@/context/AuthContext.jsx";
-import { URL } from "@/constant.js";
+import { useAuth } from "@/context/authContext.jsx";
+import { URL } from "../constant.js";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);

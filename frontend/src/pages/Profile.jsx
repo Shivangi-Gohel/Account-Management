@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Camera, Mail, MapPin, Phone, User } from "lucide-react";
-import { useAuth } from "../context/AuthContext.jsx";
+import { useAuth } from "../context/authContext.jsx";
 import Navbar from "@/components/Navbar";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Toaster, toast } from "react-hot-toast";
-import { URL } from "@/constant.js";
+import { URL } from "../constant.js";
 
 const Profile = () => {
   const { user, setUser, loading } = useAuth();
