@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/context/authContext.jsx";
+import { useAuth } from "@/context/AuthContext.jsx";
 import { Menu, X } from "lucide-react"; // icons for menu toggle
 
 const Navbar = () => {
