@@ -6,8 +6,8 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
-import Navbar from "@/components/Navbar";
-import { useAuth } from "@/context/authContext.jsx";
+import Navbar from "../components/Navbar.jsx";
+import { useAuth } from "../context/authContext.jsx";
 import { URL } from "../constant.js";
 
 const Login = () => {

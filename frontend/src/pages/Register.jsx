@@ -7,7 +7,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import Navbar from '@/components/Navbar.jsx'
+import Navbar from '../components/Navbar.jsx'
 import { URL } from "../constant.js";
 
 const Register = () => {

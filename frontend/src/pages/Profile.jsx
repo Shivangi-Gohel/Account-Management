@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Camera, Mail, MapPin, Phone, User } from "lucide-react";
 import { useAuth } from "../context/authContext.jsx";
-import Navbar from "@/components/Navbar";
+import Navbar from "../components/Navbar";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Toaster, toast } from "react-hot-toast";
