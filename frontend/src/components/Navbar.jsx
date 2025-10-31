@@ -29,7 +29,6 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <span
             onClick={() => navigate("/")}
             className="text-xl font-bold text-foreground hover:text-primary transition-colors cursor-pointer"

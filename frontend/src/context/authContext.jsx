@@ -1,23 +1,25 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import { URL } from "@/constant.js";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
-          setIsLoading(false);
+          setLoading(false);
           return;
         }
 
-        const res = await axios.get("http://localhost:8000/api/auth/profile", {
+        const res = await axios.get(`${URL}/profile`, {
           headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true,
         });
 
         if (res.data?.user) setUser(res.data.user);
@@ -25,7 +27,7 @@ export const AuthProvider = ({ children }) => {
         console.error("Auth check failed:", err.response?.data || err.message);
         localStorage.removeItem("token");
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
 
@@ -33,7 +35,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, isLoading }}>
+    <AuthContext.Provider value={{ user, setUser, loading }}>
       {children}
     </AuthContext.Provider>
   );

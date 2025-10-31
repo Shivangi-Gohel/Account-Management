@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Toaster, toast } from "react-hot-toast";
+import { URL } from "@/constant.js";
 
 const Profile = () => {
   const { user, setUser, loading } = useAuth();
@@ -50,7 +51,7 @@ const Profile = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
-        "http://localhost:8000/api/auth/update",
+        `${URL}/update`,
         formData,
         {
           headers: {
@@ -96,169 +97,12 @@ const Profile = () => {
   return (
     <>
       <Navbar />
-      {/* <div className="max-w-md mx-auto mt-10 p-6 rounded-lg text-center bg-white shadow-lg">
-        <Toaster
-          position="top-center"
-          reverseOrder={false}
-          toastOptions={{
-            style: {
-              width: "500px",
-            },
-            success: {
-              style: {
-                background: "#e6fffa",
-                color: "#065f46",
-              },
-            },
-            error: {
-              style: {
-                background: "#fee2e2",
-                color: "#991b1b",
-              },
-            },
-          }}
-        />
-        <div
-          className="relativ
-        e inline-block"
-        >
-          <img
-            src={formData.image}
-            alt="Profile"
-            className="w-28 h-28 mx-auto rounded-full object-cover border-2 border-gray-300"
-          />
-          <button
-            onClick={() => fileInputRef.current.click()}
-            className="absolute bottom-2 right-2 bg-gray-800 p-2 rounded-full hover:bg-gray-700 transition-colors"
-            title="Change profile picture"
-          >
-            <Camera className="w-4 h-4 text-white" />
-          </button>
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            onChange={handleImageChange}
-            className="hidden"
-          />
-        </div>
-
-        <div className="mt-6 text-left space-y-3">
-          <div>
-            <label className="text-sm text-gray-500 block mb-1">Name</label>
-            {isEditing ? (
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2"
-              />
-            ) : (
-              <p className="text-gray-800 font-medium">{formData.name}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="text-sm text-gray-500 block mb-1">Email</label>
-            {isEditing ? (
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2"
-              />
-            ) : (
-              <p className="text-gray-800">{formData.email}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="text-sm text-gray-500 block mb-1">Phone</label>
-            {isEditing ? (
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2"
-              />
-            ) : (
-              <p className="text-gray-800">
-                {formData.phone || "Not provided"}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label className="text-sm text-gray-500 block mb-1">Address</label>
-            {isEditing ? (
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2"
-              />
-            ) : (
-              <p className="text-gray-800">
-                {formData.address || "Not provided"}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label className="text-sm text-gray-500 block mb-1">Bio</label>
-            {isEditing ? (
-              <textarea
-                name="bio"
-                value={formData.bio}
-                onChange={handleChange}
-                rows={3}
-                className="w-full border rounded-md px-3 py-2"
-              />
-            ) : (
-              <p className="text-gray-800">{formData.bio || "No bio yet."}</p>
-            )}
-          </div>
-        </div>
-
-        <div className="mt-6 flex justify-center gap-3">
-          {isEditing ? (
-            <>
-              <Button
-                onClick={handleSave}
-              >
-                Save
-              </Button>
-              <Button
-                onClick={() => setIsEditing(false)}
-                variant="outline"
-              >
-                Cancel
-              </Button>
-            </>
-          ) : (
-            <Button
-              onClick={() => setIsEditing(true)}
-            >
-              Edit Profile
-            </Button>
-          )}
-        </div>
-      </div> */}
       <div className="max-w-3xl mx-auto px-4 py-12 md:py-16">
-          {/* Profile Card */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-            {/* Decorative gradient header */}
             <div className="h-32 bg-gradient-to-r from-blue-50 to-indigo-50"></div>
 
-            {/* Profile Content */}
             <div className="px-6 md:px-10 pb-8">
-              {/* Profile Image Section */}
               <div className="flex flex-col md:flex-row md:items-start gap-8 -mt-16 relative z-10">
-                {/* Avatar */}
                 <div className="flex-shrink-0">
                   <div className="relative inline-block group">
                     <img
@@ -285,7 +129,6 @@ const Profile = () => {
                   </div>
                 </div>
 
-                {/* Profile Info Header */}
                 <div className="flex-1 pt-4 md:pt-5">
                   <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{formData.name || "Your Name"}</h1>
                   <p className="text-lg text-gray-600 mb-6 flex items-center gap-2">
@@ -322,10 +165,8 @@ const Profile = () => {
                 </div>
               </div>
 
-              {/* Details Grid */}
               <div className="mt-12 pt-12 border-t border-gray-200">
                 <div className="grid md:grid-cols-2 gap-8">
-                  {/* Name Field */}
                   <div className="space-y-1">
                     <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">
                       <User className="w-4 h-4 text-blue-600" />
@@ -345,8 +186,6 @@ const Profile = () => {
                     )}
                   </div>
                   
-
-                  {/* Email Field */}
                   <div className="space-y-3">
                     <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">
                       <Mail className="w-4 h-4 text-blue-600" />
@@ -366,7 +205,6 @@ const Profile = () => {
                     )}
                   </div>
 
-                  {/* Phone Field */}
                   <div className="space-y-3">
                     <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">
                       <Phone className="w-4 h-4 text-blue-600" />
@@ -386,7 +224,6 @@ const Profile = () => {
                     )}
                   </div>
 
-                  {/* Address Field */}
                   <div className="space-y-3">
                     <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">
                       <MapPin className="w-4 h-4 text-blue-600" />
@@ -406,8 +243,6 @@ const Profile = () => {
                     )}
                   </div>
                 </div>
-
-                {/* Bio Field - Full Width */}
                 <div className="space-y-3 mt-8">
                   <label className="text-sm font-semibold text-gray-700 uppercase tracking-wide block">
                     Bio / About
@@ -429,8 +264,6 @@ const Profile = () => {
             </div>
           </div>
         </div>
-
-      
     </>
   );
 };

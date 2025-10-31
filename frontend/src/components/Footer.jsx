@@ -8,7 +8,7 @@ const Footer = () => {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-primary-foreground font-bold">A</span>
               </div>
-              <span className="font-bold text-foreground">AccountHub</span>
+              <span className="font-bold text-foreground">AccountApp</span>
             </div>
             <p className="text-sm text-muted-foreground">Secure account management for modern teams.</p>
           </div>

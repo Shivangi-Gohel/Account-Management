@@ -8,6 +8,7 @@ import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import { useAuth } from "@/context/authContext.jsx";
+import { URL } from "@/constant.js";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -31,16 +32,15 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/auth/login",
+        `${URL}/login`,
         formData,
         { withCredentials: true }
       );
       localStorage.setItem("token", res.data.token)
-      console.log(res.data);
       setUser(res.data.user);
       toast.success("Login successful!");
       navigate("/profile");
-      window.location.reload(); 
+      window.location.reload();
     } catch (err) {
       console.error(err.response?.data || err.message);
       toast.error(err.response?.data?.message || "Login failed");

@@ -8,6 +8,7 @@ import { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Navbar from '@/components/Navbar.jsx'
+import { URL } from "@/constant.js";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -32,11 +33,12 @@ const Register = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/auth/register",
+        `${URL}/register`,
         formData
       );
       console.log(res.data);
       toast.success(res.data.message);
+      navigate("/login");
     } catch (err) {
       console.log(err.response?.data || err.message);
       toast.error(err.response?.data?.message || "Error registering user");
