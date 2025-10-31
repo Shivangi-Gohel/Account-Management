@@ -6,15 +6,18 @@ const registerUser = async (req, res) => {
   try {
     const { name, email, password, confirmPassword } = req.body;
 
+    // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
+    // Validate password match
     if (password !== confirmPassword) {
       return res.status(400).json({ message: "Passwords do not match" });
     }
 
+    // Hash the password
     const hashedPassword = await hashPassword(password);
     const user = new User({
       name,
@@ -34,17 +37,20 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Find user by email
     const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(400).json({ message: "User does not exist" });
     }
 
+    // Validate password
     const isPasswordValid = await comparePassword(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).json({ message: "Invalid password" });
     }
 
+    // Generate JWT token
     const token = generateToken({ id: user._id, email: user.email });
 
     res.json({ message: "Login successful!", token });
@@ -89,6 +95,7 @@ const updateUserProfile = async (req, res) => {
     const userId = req.user.id; 
     const { name, email, address, phone, bio, image } = req.body;
 
+    // Update profile fields
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { name, email, address, phone, bio, image },

@@ -26,7 +26,11 @@ const Profile = () => {
   const fileInputRef = useRef(null);
   const [editloading, seteditLoading] = useState(false);
 
-  // Handle image upload and preview
+  /**
+   * Handles profile image upload
+   * - Converts image to base64 for preview
+   * - Updates `formData.image`
+   */
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -38,13 +42,21 @@ const Profile = () => {
     }
   };
 
-  // Handle input changes for fields
+  /**
+   * Generic handler for input field changes
+   * Updates formData dynamically
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle save
+  /**
+   * Submits updated profile data to backend
+   * - Uses JWT token from localStorage
+   * - Sends `POST` request to /update
+   * - Updates global user context on success
+   */
   const handleSave = async () => {
     try {
       seteditLoading(true);
@@ -72,6 +84,9 @@ const Profile = () => {
     }
   };
 
+  /**
+   * Updates local formData whenever global user context changes
+   */
   useEffect(() => {
     if (user) {
       setFormData({
@@ -86,6 +101,7 @@ const Profile = () => {
     }
   }, [user]);
 
+  // Show loading UI while user data is being fetched
   if (loading) {
     return (
       <nav className="border-b border-border bg-background sticky top-0 z-50 p-4 text-center">
