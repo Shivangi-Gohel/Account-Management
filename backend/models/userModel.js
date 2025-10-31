@@ -19,6 +19,15 @@ const userSchema = new mongoose.Schema({
     },
     image: {
         type: String,
+    },
+    address: {
+        type: String,
+    },
+    phone: {
+       type: String,
+    },
+    bio: {
+        type: String,
     }
 })
 

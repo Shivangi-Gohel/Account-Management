@@ -7,10 +7,12 @@ import { useState } from "react";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
+import { useAuth } from "@/context/authContext.jsx";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const {user, setUser, loading} = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -35,8 +37,10 @@ const Login = () => {
       );
       localStorage.setItem("token", res.data.token)
       console.log(res.data);
+      setUser(res.data.user);
       toast.success("Login successful!");
       navigate("/profile");
+      window.location.reload(); 
     } catch (err) {
       console.error(err.response?.data || err.message);
       toast.error(err.response?.data?.message || "Login failed");

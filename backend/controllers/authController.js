@@ -79,9 +79,34 @@ const getProfile = async (req, res) => {
   }
 };
 
-const me = async (req, res) => {
-    const user = await User.findById(req.user.id).select("-password");
+const profile = async (req, res) => {
+  const user = await User.findById(req.user.id).select("-password");
   res.json({ user });
 }
 
-export { registerUser, loginUser, logoutUser, getProfile, me };
+const updateUserProfile = async (req, res) => {
+  try {
+    const userId = req.user.id; 
+    const { name, email, address, phone, bio, image } = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { name, email, address, phone, bio, image },
+      { new: true }
+    ).select("-password -confirmPassword");
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      message: "Profile updated successfully",
+      user: updatedUser,
+    });
+  } catch (err) {
+    console.error("Error updating profile:", err);
+    res.status(500).json({ message: "Server error while updating profile" });
+  }
+};
+
+export { registerUser, loginUser, logoutUser, getProfile, profile, updateUserProfile };
