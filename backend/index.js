@@ -9,7 +9,7 @@ const app = express();
 connectDB();
 
 app.use(cors({
-  origin: "https://account-management-two.vercel.app",  
+  origin: ["http://localhost:5173", "https://account-management-two.vercel.app"],  
   credentials: true,        
 }))
 
