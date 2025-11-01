@@ -58,20 +58,6 @@ const loginUser = async (req, res) => {
   }
 };
 
-const logoutUser = async (req, res) => {
-  try {
-    return res
-      .status(200)
-      .cookie("token", "", {
-        maxAge: 0,
-      })
-      .json({ success: true, message: "Logout successful" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
-
 const getProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
@@ -115,4 +101,4 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser, logoutUser, getProfile, profile, updateUserProfile };
+export { registerUser, loginUser, getProfile, profile, updateUserProfile };

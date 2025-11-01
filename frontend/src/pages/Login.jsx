@@ -30,6 +30,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const res = await axios.post(
         `${URL}/login`,
@@ -44,6 +45,8 @@ const Login = () => {
     } catch (err) {
       console.error(err.response?.data || err.message);
       toast.error(err.response?.data?.message || "Login failed");
+    } finally {
+      setIsLoading(false);
     }
   };
 

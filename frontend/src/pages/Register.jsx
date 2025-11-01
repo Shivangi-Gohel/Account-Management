@@ -57,6 +57,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
+    setIsLoading(true);
     try {
       const res = await axios.post(
         `${URL}/register`,
@@ -69,6 +70,9 @@ const Register = () => {
       console.log(err.response?.data || err.message);
       toast.error(err.response?.data?.message || "Error registering user");
     }
+    finally {
+      setIsLoading(false);
+    };
   };
 
   return (
