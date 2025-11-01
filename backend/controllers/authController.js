@@ -23,7 +23,6 @@ const registerUser = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      confirmPassword: hashedPassword,
     });
     await user.save();
 
@@ -100,7 +99,7 @@ const updateUserProfile = async (req, res) => {
       userId,
       { name, email, address, phone, bio, image },
       { new: true }
-    ).select("-password -confirmPassword");
+    ).select("-password");
 
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
